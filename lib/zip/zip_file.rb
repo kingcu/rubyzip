@@ -105,7 +105,7 @@ module Zip
 
       # Like #open, but reads zip archive contents from a String or open IO
       # stream, and outputs data to a buffer.
-      # (This can be used to extract data from a 
+      # (This can be used to extract data from a
       # downloaded zip archive without first saving it to disk.)
       def open_buffer(io)
         zf = ZipFile.new('',true,true)
@@ -220,6 +220,7 @@ module Zip
             |e|
             e.write_to_zip_output_stream(zos)
             e.dirty = false
+            e.unlink if e.is_a? ZipStreamableStream
           }
           zos.comment = comment
         }
